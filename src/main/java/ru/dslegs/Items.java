@@ -8,7 +8,6 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.components.CustomModelDataComponent;
 import org.bukkit.persistence.PersistentDataType;
 
 public final class Items {
@@ -52,19 +51,13 @@ public final class Items {
         lore.add(Util.item("<gradient:" + t.color + ":#ffffff:" + t.color + "><strikethrough>          </strikethrough> ✦ ✦ ✦ <strikethrough>          </strikethrough>"));
         m.lore(lore);
 
-        // "Сложная" custom model data: float (id) + string (ключ) + flag
-        CustomModelDataComponent cmd = m.getCustomModelDataComponent();
-        int id = P.getConfig().getInt("cmd-ids." + t.key, t.cmd);
-        cmd.setFloats(List.of((float) id));
-        // float32 не хранит нечётные числа > 16 777 216 - точный ID лежит ещё и строкой (strings[0])
-        cmd.setStrings(List.of(String.valueOf(id), "dslegs:" + t.key));
-        cmd.setFlags(List.of(true));
-        m.setCustomModelDataComponent(cmd);
+        // custom model data: на 1.21.4+ float + строки (float32 не хранит нечётные числа > 16 777 216), иначе число
+        Compat.customModelData(m, P.getConfig().getInt("cmd-ids." + t.key, t.cmd), t.key);
 
         String model = P.getConfig().getString("item-models." + t.key, t.model());
         if (model != null && !model.isBlank()) {
             NamespacedKey mk = NamespacedKey.fromString(model);
-            if (mk != null) m.setItemModel(mk);
+            if (mk != null) Compat.itemModel(m, mk);
         }
 
         m.setUnbreakable(true);

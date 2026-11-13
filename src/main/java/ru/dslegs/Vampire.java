@@ -41,7 +41,7 @@ public final class Vampire implements Listener {
 
     /** Сколько сердец макс. здоровья сейчас украдено у других (для HUD). */
     public double bonusHearts(Player p) {
-        AttributeInstance a = p.getAttribute(Attribute.MAX_HEALTH);
+        AttributeInstance a = p.getAttribute(Compat.MAX_HEALTH);
         if (a == null) return 0;
         AttributeModifier m = a.getModifier(gainKey);
         return m == null ? 0 : m.getAmount() / 2.0;
@@ -67,7 +67,7 @@ public final class Vampire implements Listener {
 
         // +½ сердца урона -> лечит владельца
         e.setDamage(e.getDamage() + EXTRA);
-        AttributeInstance ma = p.getAttribute(Attribute.MAX_HEALTH);
+        AttributeInstance ma = p.getAttribute(Compat.MAX_HEALTH);
         double max = ma == null ? 20 : ma.getValue();
         p.setHealth(Math.min(max, p.getHealth() + EXTRA));
 
@@ -81,7 +81,7 @@ public final class Vampire implements Listener {
     }
 
     private void steal(Player owner, Player victim) {
-        AttributeInstance va = victim.getAttribute(Attribute.MAX_HEALTH);
+        AttributeInstance va = victim.getAttribute(Compat.MAX_HEALTH);
         if (va == null) return;
         double min = MIN_MAX_HP - va.getBaseValue();
         double taken = -adjust(victim, lossKey, -STEAL, min, 0);
@@ -97,7 +97,7 @@ public final class Vampire implements Listener {
     }
 
     private double adjust(LivingEntity le, NamespacedKey key, double delta, double min, double max) {
-        AttributeInstance a = le.getAttribute(Attribute.MAX_HEALTH);
+        AttributeInstance a = le.getAttribute(Compat.MAX_HEALTH);
         if (a == null) return 0;
         AttributeModifier old = a.getModifier(key);
         double cur = old == null ? 0 : old.getAmount();
@@ -110,7 +110,7 @@ public final class Vampire implements Listener {
     }
 
     public void clear(Player p) {
-        AttributeInstance a = p.getAttribute(Attribute.MAX_HEALTH);
+        AttributeInstance a = p.getAttribute(Compat.MAX_HEALTH);
         if (a == null) return;
         if (a.getModifier(gainKey) != null) a.removeModifier(a.getModifier(gainKey));
         if (a.getModifier(lossKey) != null) a.removeModifier(a.getModifier(lossKey));

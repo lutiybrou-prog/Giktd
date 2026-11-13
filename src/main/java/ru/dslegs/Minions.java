@@ -60,12 +60,12 @@ public final class Minions implements Listener {
                 zz.setGlowing(true);
                 zz.customName(Util.mm("<#B04DFF><bold>Тень монарха"));
                 zz.setCustomNameVisible(true);
-                attr(zz, Attribute.MAX_HEALTH, 40);
+                attr(zz, Compat.MAX_HEALTH, 40);
                 zz.setHealth(40);
-                attr(zz, Attribute.ATTACK_DAMAGE, 8);
-                attr(zz, Attribute.MOVEMENT_SPEED, 0.3);
-                attr(zz, Attribute.FOLLOW_RANGE, 40);
-                attr(zz, Attribute.SPAWN_REINFORCEMENTS, 0);
+                attr(zz, Compat.ATTACK_DAMAGE, 8);
+                attr(zz, Compat.MOVEMENT_SPEED, 0.3);
+                attr(zz, Compat.FOLLOW_RANGE, 40);
+                attr(zz, Compat.SPAWN_REINFORCEMENTS, 0);
                 EntityEquipment eq = zz.getEquipment();
                 eq.setHelmet(new ItemStack(Material.NETHERITE_HELMET));
                 eq.setChestplate(new ItemStack(Material.NETHERITE_CHESTPLATE));

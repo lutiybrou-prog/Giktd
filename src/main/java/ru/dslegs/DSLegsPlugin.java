@@ -42,6 +42,14 @@ public final class DSLegsPlugin extends JavaPlugin {
         getCommand("dslegs").setExecutor(cmd);
         getCommand("dslegs").setTabCompleter(cmd);
 
+        if (!Compat.hasItemModel())
+            getLogger().warning("Сервер старше 1.21.2: компонент item_model недоступен, 3D-модели Sakura Katana "
+                    + "и Warrior Greatsword выбираются только по custom_model_data (см. README).");
+        for (LegendaryType t : LegendaryType.values()) {   // ранняя проверка: предметы создаются на этой версии сервера
+            try { Items.create(t); }
+            catch (Throwable ex) { getLogger().severe("Не удалось создать " + t.key + ": " + ex); }
+        }
+
         hud.start();
         stun.start();
         Fx.start();

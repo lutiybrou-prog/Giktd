@@ -87,7 +87,7 @@ public final class Abilities {
         final Map<UUID, AttributeModifier> lost = new HashMap<>();
         double gained = 0;
         for (LivingEntity le : list) {
-            AttributeInstance ai = le.getAttribute(Attribute.MAX_HEALTH);
+            AttributeInstance ai = le.getAttribute(Compat.MAX_HEALTH);
             if (ai == null) continue;
             double loss = Math.min(2.0, Math.max(0, ai.getValue() - 2.0));   // минимум 1 сердце остаётся
             if (loss <= 0) continue;
@@ -100,7 +100,7 @@ public final class Abilities {
         }
         final double gain = Math.min(gained, maxBonus);
         AttributeModifier ownerMod = null;
-        AttributeInstance oa = p.getAttribute(Attribute.MAX_HEALTH);
+        AttributeInstance oa = p.getAttribute(Compat.MAX_HEALTH);
         if (oa != null && gain > 0) {
             ownerMod = new AttributeModifier(new NamespacedKey(plugin, "paladin_" + UUID.randomUUID()),
                     gain, AttributeModifier.Operation.ADD_NUMBER);
@@ -116,13 +116,13 @@ public final class Abilities {
             for (Map.Entry<UUID, AttributeModifier> en : lost.entrySet()) {
                 Entity e = Bukkit.getEntity(en.getKey());
                 if (e instanceof LivingEntity le) {
-                    AttributeInstance ai = le.getAttribute(Attribute.MAX_HEALTH);
+                    AttributeInstance ai = le.getAttribute(Compat.MAX_HEALTH);
                     if (ai != null) ai.removeModifier(en.getValue());
                 }
             }
             Player owner = Bukkit.getPlayer(ownerId);
             if (owner != null && om != null) {
-                AttributeInstance ai = owner.getAttribute(Attribute.MAX_HEALTH);
+                AttributeInstance ai = owner.getAttribute(Compat.MAX_HEALTH);
                 if (ai != null) {
                     ai.removeModifier(om);
                     if (owner.getHealth() > ai.getValue()) owner.setHealth(ai.getValue());
@@ -1005,7 +1005,7 @@ public final class Abilities {
         }
         final int dur = plugin.getConfig().getInt("sanguine.duration-seconds", 15) * 20;
         final double target = plugin.getConfig().getDouble("sanguine.max-health", 14.0);   // 7 сердец
-        AttributeInstance ai = p.getAttribute(Attribute.MAX_HEALTH);
+        AttributeInstance ai = p.getAttribute(Compat.MAX_HEALTH);
         if (ai != null) {
             if (ai.getModifier(sanguineKey) != null) ai.removeModifier(ai.getModifier(sanguineKey));
             double loss = Math.max(0, ai.getValue() - target);
@@ -1066,7 +1066,7 @@ public final class Abilities {
 
     public void endSanguine(Player p) {
         sanguineUntil.remove(p.getUniqueId());
-        AttributeInstance ai = p.getAttribute(Attribute.MAX_HEALTH);
+        AttributeInstance ai = p.getAttribute(Compat.MAX_HEALTH);
         if (ai != null && ai.getModifier(sanguineKey) != null) ai.removeModifier(ai.getModifier(sanguineKey));
     }
 
