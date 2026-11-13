@@ -1,0 +1,16 @@
+name: DSLegs
+version: '${project.version}'
+main: ru.dslegs.DSLegsPlugin
+api-version: '1.21'
+description: Легендарное оружие со способностями
+commands:
+  dslegs:
+    description: Меню легендарного оружия
+    usage: /dslegs [give <оружие> [игрок]]
+    permission: dslegs.use
+    aliases: [legs]
+permissions:
+  dslegs.use:
+    default: op
+  dslegs.admin:
+    default: op

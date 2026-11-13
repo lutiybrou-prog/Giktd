@@ -1,0 +1,92 @@
+# Перезарядки способностей (секунды)
+cooldowns:
+  excalibur: 75
+  light_mace: 20
+  vampire_blade: 60
+  sonic_crossbow: 45
+  dark_katana: 60
+  ice_sword: 60
+  soul_fortress: 60   # в ТЗ не указано - поставил 60
+  frostmorn: 60       # в ТЗ не указано - поставил 60
+  monarch_zombies: 45 # ПКМ посоха, в ТЗ не указано
+  monarch_launch: 20  # Shift+ЛКМ посоха, в ТЗ не указано
+  shadow_reaper: 35
+  sanguine_art: 55
+  explosive_bow: 15
+  sakura_dash: 12     # ПКМ катаны сакуры
+  sakura_bloom: 40    # Shift+ЛКМ катаны сакуры
+  warrior_greatsword: 30
+
+fortress:
+  radius: 7.0
+  duration-seconds: 10
+
+vampire:
+  max-bonus-health: 20.0        # максимум доп. здоровья владельца (в HP, 20 = 10 сердец)
+  steal-duration-seconds: 120   # через сколько украденное макс. здоровье возвращается
+
+frostmorn:
+  duration-seconds: 10
+
+monarch:
+  zombie-count: 5
+  zombie-lifetime-seconds: 25
+
+sanguine:
+  duration-seconds: 15
+  max-health: 14.0           # макс. здоровье на время ритуала (14 HP = 7 сердец)
+
+explosive:
+  power: 4.0                 # базовая сила (как у TNT)
+  radius-multiplier: 3.0     # радиус взрыва x3
+  self-damage: false         # бьёт ли взрыв самого стрелка
+  break-blocks: false
+
+paladin:
+  duration-seconds: 20
+  max-bonus-health: 20.0     # максимум доп. здоровья владельца (HP)
+
+sakura:
+  dash-range: 8.0
+  dash-damage: 6.0           # 3 сердца
+  trail-seconds: 3.0         # сколько лепестки осыпаются вдоль следа рывка
+  bloom-radius: 6.0
+  bloom-damage: 8.0          # 4 сердца
+  stun-seconds: 2.0
+  blindness-seconds: 3.0     # Слепота II
+
+warrior:
+  range: 12.0
+  damage: 8.0                # 4 сердца
+  resistance-seconds: 5.0
+
+# Общие визуальные эффекты
+visuals:
+  aura: true         # частицы вокруг игрока с легендаркой в руке
+  equip: true        # спираль при взятии оружия в руку
+  cast: true         # кольцо при активации способности
+  ready: true        # кольцо, когда способность перезарядилась
+  hit-effects: true  # искры цвета оружия при ударе
+
+# 3D-модели (компонент item_model, ресурспак resourcepack/). Пустая строка - без модели.
+item-models:
+  sakura_katana: "sakura:sakura_katana"
+  warrior_greatsword: "warrior:warrior_greatsword"
+
+# Custom model data. float (округляется!), точный ID - строкой strings[0], вторая строка "dslegs:<ключ>"
+cmd-ids:
+  excalibur: 20000000
+  light_mace: 20000001
+  vampire_blade: 20000002
+  artemis_bow: 20000003
+  sonic_crossbow: 20000004
+  dark_katana: 20000005
+  ice_sword: 20000006
+  soul_fortress: 20000007
+  frostmorn: 20000008
+  monarch_staff: 20000009
+  shadow_reaper: 20000010
+  sanguine_art: 20000011
+  explosive_bow: 20000012
+  sakura_katana: 20000013
+  warrior_greatsword: 20000014
